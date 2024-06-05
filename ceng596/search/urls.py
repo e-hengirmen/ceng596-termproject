@@ -4,7 +4,6 @@ from django.urls import path, include, re_path
 from .views import *
 
 urlpatterns = [
-    # path('/', include('search.urls')),
     path(
         '',
         SearchPageView.as_view(),
@@ -16,7 +15,7 @@ urlpatterns = [
         name=ResultPageView.url_name
     ),
     re_path(
-        r'doc/(?P<document_id>\d+)>',
+        r'document/(?P<document_id>\d+)',
         DocumentPageView.as_view(),
         name=DocumentPageView.url_name
     ),
