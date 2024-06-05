@@ -15,7 +15,7 @@ urlpatterns = [
         name=ResultPageView.url_name
     ),
     re_path(
-        r'document/(?P<document_id>\d+)',
+        r'document/(?P<document_id>.+)',
         DocumentPageView.as_view(),
         name=DocumentPageView.url_name
     ),

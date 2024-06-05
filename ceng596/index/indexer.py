@@ -13,7 +13,12 @@ pt.init()
 files = pt.io.find_files(data_dir)
 
 # build the index
-indexer = pt.TRECCollectionIndexer(index_dir, verbose=True, blocks=True, overwrite=True)
+indexer = pt.TRECCollectionIndexer(
+    index_dir,
+    verbose=True,
+    blocks=True,
+    overwrite=True,
+)
 indexref = indexer.index(files)
 
 # load the index, print the statistics
@@ -21,25 +26,3 @@ index = pt.IndexFactory.of(indexref)
 print(index.getCollectionStatistics().toString())
 
 
-
-tfidf = pt.BatchRetrieve(indexref, wmodel="TF_IDF")
-bm25 = pt.BatchRetrieve(indexref, wmodel="BM25")
-query = "prime minister powerful infrastructure"
-results = bm25.search(query)
-
-print(results[['docno', 'rank', 'score']])
-
-
-# for field in results:
-#     for val in results[field]:
-
-topics = pt.io.read_topics('AP_collection/topics.txt', format='singleline')
-qrels = pt.io.read_qrels('AP_collection/qrels.txt')
-exp = pt.Experiment(
-    [tfidf, bm25],
-    topics,
-    qrels,
-    eval_metrics=["map", "recip_rank"]
-) 
-
-bm25.get_topics(), bm25.get_qrels() kısımlarına doğrudan path versen çalışıyor olmalı
