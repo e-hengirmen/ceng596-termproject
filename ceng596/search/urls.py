@@ -10,7 +10,7 @@ urlpatterns = [
         name=SearchPageView.url_name
     ),
     re_path(
-        r'results/(?P<query>\w+)',
+        r'results/(?P<query>.+)',
         ResultPageView.as_view(),
         name=ResultPageView.url_name
     ),

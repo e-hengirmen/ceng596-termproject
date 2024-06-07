@@ -1,3 +1,4 @@
+import re
 from bs4 import BeautifulSoup
 
 from django.views.generic import View
@@ -25,7 +26,7 @@ class ResultPageView(View):
     url_name = 'doogle_results'
 
     def get(self, request, query):
-        # TODO: get results
+        print(query)
         results = search_query(query)
         context = {'query': query, 'results': results}
         return render(request, 'doogle_results.html', context)
@@ -49,3 +50,4 @@ class DocumentPageView(View):
         doc_tags = soup.find_all('doc')
         document = doc_tags[doc_num_int]
         return HttpResponse(document, content_type='text/plain')
+
